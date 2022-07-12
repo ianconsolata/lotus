@@ -1,0 +1,163 @@
+project_name: lotus
+before:
+  hooks:
+    - go mod tidy
+    - make deps
+
+universal_binaries:
+  - id: macos-lotus
+    replace: true
+    name_template: lotus
+    ids:
+      - macos-lotus-amd64
+      - macos-lotus-arm64
+  - id: macos-miner
+    replace: true
+    name_template: lotus-miner
+    ids:
+      - macos-miner-amd64
+      - macos-miner-arm64
+  - id: macos-worker
+    replace: true
+    name_template: lotus-worker
+    ids:
+      - macos-worker-amd64
+      - macos-worker-arm64
+
+builds:
+  - id: macos-lotus-amd64
+    main: ./cmd/lotus
+    binary: lotus
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    env:
+      - CGO_ENABLED=1
+      - FFI_BUILD_FROM_SOURCE=1
+    ldflags:
+      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+  - id: macos-miner-amd64
+    main: ./cmd/lotus-miner
+    binary: lotus-miner
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    env:
+      - CGO_ENABLED=1
+      - FFI_BUILD_FROM_SOURCE=1
+    ldflags:
+      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+  - id: macos-worker-amd64
+    main: ./cmd/lotus-worker
+    binary: lotus-worker
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    env:
+      - CGO_ENABLED=1
+      - FFI_BUILD_FROM_SOURCE=1
+    ldflags:
+      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+  - id: macos-lotus-arm64
+    main: ./cmd/lotus
+    binary: lotus
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    env:
+      - CGO_ENABLED=1
+      - FFI_BUILD_FROM_SOURCE=1
+      - CPATH=/opt/homebrew/include
+      - LIBRARY_PATH=/opt/homebrew/lib
+    ldflags:
+      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+  - id: macos-miner-arm64
+    main: ./cmd/lotus-miner
+    binary: lotus-miner
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    env:
+      - CGO_ENABLED=1
+      - FFI_BUILD_FROM_SOURCE=1
+      - CPATH=/opt/homebrew/include
+      - LIBRARY_PATH=/opt/homebrew/lib
+    ldflags:
+      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+  - id: macos-worker-arm64
+    main: ./cmd/lotus-worker
+    binary: lotus-worker
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    env:
+      - CGO_ENABLED=1
+      - FFI_BUILD_FROM_SOURCE=1
+      - CPATH=/opt/homebrew/include
+      - LIBRARY_PATH=/opt/homebrew/lib
+    ldflags:
+      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+#  - id: linux
+#    main: ./cmd/lotus
+#    binary: lotus
+#    goos:
+#      - linux
+#    goarch:
+#      - amd64
+#    env:
+#      - CGO_ENABLED=1
+#    ldflags:
+#      - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
+
+archives:
+  - id: primary
+    format: tar.gz
+    wrap_in_directory: true
+
+release:
+  github:
+    owner: ianconsolata
+    name: lotus
+  prerelease: auto
+  mode: append
+  name_template: "Release v{{.Version}}"
+
+
+brews:
+  - tap:
+      owner: ianconsolata
+      name: homebrew-lotus
+      branch: master
+    ids:
+      - primary
+    install: |
+      bin.install "lotus"
+      bin.install "lotus-miner"
+      bin.install "lotus-worker"
+    test: |
+      system "#{bin}/lotus --version"
+      system "#{bin}/lotus-miner --version"
+      system "#{bin}/lotus-worker --version"
+    folder: Formula
+    homepage: "https://filecoin.io"
+    description: "A homebrew cask for installing filecoin-project/lotus on MacOS"
+    license: MIT
+    dependencies:
+      - name: pkg-config
+      - name: jq
+      - name: bzr
+      - name: hwloc
+
+
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha512
+
+snapshot:
+  name_template: "{{ .Tag }}"
