@@ -5,19 +5,17 @@ before:
     - make deps
 
 universal_binaries:
-  - id: macos-lotus
+  - id: lotus
     replace: true
-    name_template: lotus
     ids:
       - macos-lotus-amd64
       - macos-lotus-arm64
-  - id: macos-miner
+  - id: lotus-miner
     replace: true
-    name_template: lotus-miner
     ids:
       - macos-miner-amd64
       - macos-miner-arm64
-  - id: macos-worker
+  - id: lotus-worker
     replace: true
     name_template: lotus-worker
     ids:
@@ -25,7 +23,7 @@ universal_binaries:
       - macos-worker-arm64
 
 builds:
-  - id: macos-lotus-amd64
+  - id: lotus_darwin_amd64
     main: ./cmd/lotus
     binary: lotus
     goos:
@@ -37,7 +35,7 @@ builds:
       - FFI_BUILD_FROM_SOURCE=1
     ldflags:
       - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
-  - id: macos-miner-amd64
+  - id: lotus-miner_darwin_amd64
     main: ./cmd/lotus-miner
     binary: lotus-miner
     goos:
@@ -49,7 +47,7 @@ builds:
       - FFI_BUILD_FROM_SOURCE=1
     ldflags:
       - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
-  - id: macos-worker-amd64
+  - id: lotus-worker_darwin_amd64
     main: ./cmd/lotus-worker
     binary: lotus-worker
     goos:
@@ -61,7 +59,7 @@ builds:
       - FFI_BUILD_FROM_SOURCE=1
     ldflags:
       - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
-  - id: macos-lotus-arm64
+  - id: lotus_darwin_arm64
     main: ./cmd/lotus
     binary: lotus
     goos:
@@ -75,7 +73,7 @@ builds:
       - LIBRARY_PATH=/opt/homebrew/lib
     ldflags:
       - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
-  - id: macos-miner-arm64
+  - id: lotus-miner_darwin_arm64
     main: ./cmd/lotus-miner
     binary: lotus-miner
     goos:
@@ -89,7 +87,7 @@ builds:
       - LIBRARY_PATH=/opt/homebrew/lib
     ldflags:
       - -X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.{{.ShortCommit}}
-  - id: macos-worker-arm64
+  - id: lotus-worker_darwin_arm64
     main: ./cmd/lotus-worker
     binary: lotus-worker
     goos:
@@ -153,11 +151,6 @@ brews:
       - name: jq
       - name: bzr
       - name: hwloc
-
-
-checksum:
-  name_template: 'checksums.txt'
-  algorithm: sha512
 
 snapshot:
   name_template: "{{ .Tag }}"
