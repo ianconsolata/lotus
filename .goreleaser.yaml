@@ -8,19 +8,19 @@ universal_binaries:
   - id: lotus
     replace: true
     ids:
-      - macos-lotus-amd64
-      - macos-lotus-arm64
+      - lotus_darwin_amd64
+      - lotus_darwin_arm64
   - id: lotus-miner
     replace: true
     ids:
-      - macos-miner-amd64
-      - macos-miner-arm64
+      - lotus-miner_darwin_amd64
+      - lotus-miner_darwin_arm64
   - id: lotus-worker
     replace: true
     name_template: lotus-worker
     ids:
-      - macos-worker-amd64
-      - macos-worker-arm64
+      - lotus-worker_darwin_amd64
+      - lotus-worker_darwin_arm64
 
 builds:
   - id: lotus_darwin_amd64
