@@ -7,11 +7,13 @@ before:
 universal_binaries:
   - id: lotus
     replace: true
+    name_template: lotus
     ids:
       - lotus_darwin_amd64
       - lotus_darwin_arm64
   - id: lotus-miner
     replace: true
+    name_template: lotus-miner
     ids:
       - lotus-miner_darwin_amd64
       - lotus-miner_darwin_arm64
