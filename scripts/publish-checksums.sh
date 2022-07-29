@@ -61,7 +61,7 @@ fi
 RELEASE_UPLOAD_URL=`echo "${RELEASE_RESPONSE}" | jq -r '.upload_url' | cut -d'{' -f1`
 echo "Preparing to send artifacts to ${RELEASE_UPLOAD_URL}"
 
-for CHECKSUM_FILE in "*.{cid,sha512}"
+for CHECKSUM_FILE in *.{cid,sha512}
 do
   echo "Uploading ${CHECKSUM_FILE}..."
   curl \
