@@ -152,5 +152,9 @@ brews:
       - name: bzr
       - name: hwloc
 
+# produced manually so we can include cid checksums
+checksum:
+  disable: true
+
 snapshot:
   name_template: "{{ .Tag }}"
