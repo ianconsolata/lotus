@@ -318,7 +318,7 @@ jobs:
       - prepare
       - run: sudo apt-get update
       - run: sudo apt-get install npm
-      - run: make lotus lotus-miner lotus-worker
+      - run: FFI_BUILD_FROM_SOURCE=1 make lotus lotus-miner lotus-worker
       - run:
           name: check tag and version output match
           command: ./scripts/version-check.sh ./lotus
