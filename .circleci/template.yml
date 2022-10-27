@@ -405,8 +405,8 @@ jobs:
       - run:
           name: cleanup hwloc
           command: |
-            cd ~/hwloc && sudo make uninstall
-            cd .. && rm -rf ~/hwloc
+            cd ~/hwloc/hwloc-2.4.1 && sudo make uninstall
+            cd && rm -rf ~/hwloc
           when: always
 
 
