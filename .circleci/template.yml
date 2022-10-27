@@ -372,7 +372,7 @@ jobs:
       - restore_cache:
           name: restore cargo cache
           key: v3-go-deps-{{ arch }}-{{ checksum "~/go/src/github.com/filecoin-project/lotus/go.sum" }}
-      - run: FFI_BUILD_FROM_SOURCE=1 make lotus lotus-miner lotus-worker
+      - run: echo $PATH && make lotus lotus-miner lotus-worker
       - run: |
           mkdir -p /tmp/workspace/darwin_arm64 && \
           mv lotus lotus-miner lotus-worker /tmp/workspace/darwin_arm64/
