@@ -75,9 +75,9 @@ commands:
             - run:
                 name: Install hwloc
                 command: |
-                  mkdir /tmp/hwloc
+                  mkdir ~/hwloc
                   curl --location https://download.open-mpi.org/release/hwloc/v2.4/hwloc-2.4.1.tar.gz --output /tmp/hwloc/hwloc-2.4.1.tar.gz
-                  cd /tmp/hwloc
+                  cd ~/hwloc
                   tar -xvzpf hwloc-2.4.1.tar.gz
                   cd hwloc-2.4.1
                   ./configure && make && sudo make install
@@ -405,9 +405,9 @@ jobs:
       - run:
           name: cleanup hwloc
           command: |
-            cd /tmp/hwloc/hwloc-2.4.1
+            cd ~/hwloc/hwloc-2.4.1
             make clean && sudo make uninstall
-            cd && sudo rm -rf /tmp/hwloc
+            cd && sudo rm -rf ~/hwloc
           when: always
 
 
