@@ -407,6 +407,7 @@ jobs:
           command: |
             cd ~/hwloc && sudo make uninstall
             cd .. && rm -rf ~/hwloc
+          when: always
 
 
   release:
