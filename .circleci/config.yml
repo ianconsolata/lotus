@@ -76,7 +76,7 @@ commands:
                 name: Install hwloc
                 command: |
                   mkdir ~/hwloc
-                  curl --location https://download.open-mpi.org/release/hwloc/v2.4/hwloc-2.4.1.tar.gz --output /tmp/hwloc/hwloc-2.4.1.tar.gz
+                  curl --location https://download.open-mpi.org/release/hwloc/v2.4/hwloc-2.4.1.tar.gz --output ~/hwloc/hwloc-2.4.1.tar.gz
                   cd ~/hwloc
                   tar -xvzpf hwloc-2.4.1.tar.gz
                   cd hwloc-2.4.1
