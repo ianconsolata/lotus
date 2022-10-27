@@ -398,6 +398,11 @@ jobs:
       - run:
           command: make clean
           when: always
+      - run:
+          name: cleanup homebrew
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew uninstall pkg-config goreleaser/tap/goreleaser-pro coreutils jq hwloc
+          when: always
+
 
   release:
     executor: golang
