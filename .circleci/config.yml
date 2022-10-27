@@ -392,12 +392,26 @@ jobs:
 
   release:
     executor: golang
+    parameters:
+      dry-run:
+        default: false
+        description: should this release actually publish it's artifacts?
+        type: boolean
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - run: goreleaser release --rm-dist --snapshot
-      - run: ./scripts/generate-checksums.sh
-      - run: ./scripts/publish-checksums.sh
+      - when:
+          condition: << parameters.dry-run >>
+          steps:
+            - run: goreleaser release --rm-dist --snapshot
+            - run: ./scripts/generate-checksums.sh
+      - when:
+          condition:
+            not: << parameters.dry-run >>
+          steps:
+            - run: goreleaser release --rm-dist
+            - run: ./scripts/generate-checksums.sh
+            - run: ./scripts/publish-checksums.sh
 
   build-appimage:
     machine:
@@ -1137,7 +1151,8 @@ workflows:
               only:
                 - /^v\d+\.\d+\.\d+(-rc\d+)?$/
       - release:
-          name: "Release"
+          name: "Release (dry-run)"
+          dry-run: true
           requires:
             - "Build ( darwin / amd64 )"
             - "Build ( linux / amd64 )"
