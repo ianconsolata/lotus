@@ -408,7 +408,6 @@ jobs:
             cd ~/hwloc/hwloc-2.4.1
             make clean && sudo make uninstall
             cd && sudo rm -rf ~/hwloc
-          when: always
 
 
   release:
