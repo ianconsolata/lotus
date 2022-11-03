@@ -67,20 +67,11 @@ commands:
             - run: go version
             - run:
                 name: Install dependencies with Homebrew
-                command: HOMEBREW_NO_AUTO_UPDATE=1 brew install pkg-config goreleaser/tap/goreleaser-pro coreutils jq
+                command: HOMEBREW_NO_AUTO_UPDATE=1 brew install pkg-config goreleaser/tap/goreleaser-pro coreutils jq hwloc
             - run:
                 name: Install Rust
                 command: |
                   curl https://sh.rustup.rs -sSf | sh -s -- -y
-            - run:
-                name: Install hwloc
-                command: |
-                  mkdir ~/hwloc
-                  curl --location https://download.open-mpi.org/release/hwloc/v2.4/hwloc-2.4.1.tar.gz --output ~/hwloc/hwloc-2.4.1.tar.gz
-                  cd ~/hwloc
-                  tar -xvzpf hwloc-2.4.1.tar.gz
-                  cd hwloc-2.4.1
-                  ./configure && make && sudo make install
       - run: git submodule sync
       - run: git submodule update --init
   download-params:
@@ -400,15 +391,8 @@ jobs:
           when: always
       - run:
           name: cleanup homebrew
-          command: HOMEBREW_NO_AUTO_UPDATE=1 brew uninstall pkg-config goreleaser/tap/goreleaser-pro coreutils jq
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew uninstall pkg-config goreleaser/tap/goreleaser-pro coreutils jq hwloc
           when: always
-      - run:
-          name: cleanup hwloc
-          command: |
-            cd ~/hwloc/hwloc-2.4.1
-            make clean && sudo make uninstall
-            cd && sudo rm -rf ~/hwloc
-
 
   release:
     executor: golang
