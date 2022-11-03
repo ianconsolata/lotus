@@ -11,6 +11,9 @@ executors:
   ubuntu:
     docker:
       - image: ubuntu:20.04
+  goreleaser:
+    docker:
+      - image: goreleaser/goreleaser-pro
   packer:
     description: |
       The HashiCorp provided Packer container
@@ -67,7 +70,7 @@ commands:
             - run: go version
             - run:
                 name: Install dependencies with Homebrew
-                command: HOMEBREW_NO_AUTO_UPDATE=1 brew install pkg-config goreleaser/tap/goreleaser-pro coreutils jq hwloc
+                command: HOMEBREW_NO_AUTO_UPDATE=1 brew install pkg-config coreutils jq hwloc
             - run:
                 name: Install Rust
                 command: |
@@ -394,11 +397,11 @@ jobs:
           when: always
       - run:
           name: cleanup homebrew
-          command: HOMEBREW_NO_AUTO_UPDATE=1 brew uninstall pkg-config goreleaser/tap/goreleaser-pro coreutils jq hwloc
+          command: HOMEBREW_NO_AUTO_UPDATE=1 brew uninstall pkg-config coreutils jq hwloc
           when: always
 
   release:
-    executor: golang
+    executor: goreleaser
     parameters:
       dry-run:
         default: false
