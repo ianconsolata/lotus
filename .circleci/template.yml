@@ -365,6 +365,8 @@ jobs:
     resource_class: filecoin-project/self-hosted-m1
     steps:
       - run: echo 'export PATH=/opt/homebrew/bin:"$PATH"' >> "$BASH_ENV"
+      - run: echo 'export CPATH=$(brew --prefix)/include' >> "$BASH_ENV"
+      - run: echo 'export LIBRARY_PATH=$(brew --prefix)/lib' >> "$BASH_ENV"
       - prepare:
           linux: false
           darwin: true
