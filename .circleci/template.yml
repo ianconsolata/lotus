@@ -365,8 +365,6 @@ jobs:
     resource_class: filecoin-project/self-hosted-m1
     steps:
       - run: echo 'export PATH=/opt/homebrew/bin:"$PATH"' >> "$BASH_ENV"
-      - run: echo 'export CPATH=$(brew --prefix)/include' >> "$BASH_ENV"
-      - run: echo 'export LIBRARY_PATH=$(brew --prefix)/lib' >> "$BASH_ENV"
       - prepare:
           linux: false
           darwin: true
@@ -374,7 +372,10 @@ jobs:
       - restore_cache:
           name: restore cargo cache
           key: v3-go-deps-{{ arch }}-{{ checksum "~/go/src/github.com/filecoin-project/lotus/go.sum" }}
-      - run: echo $PATH && make lotus lotus-miner lotus-worker
+      - run: |
+          export CPATH=$(brew --prefix)/include
+          export LIBRARY_PATH=$(brew --prefix)/lib
+          make lotus lotus-miner lotus-worker
       - run: |
           mkdir -p /tmp/workspace/darwin_arm64 && \
           mv lotus lotus-miner lotus-worker /tmp/workspace/darwin_arm64/
