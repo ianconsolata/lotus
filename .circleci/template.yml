@@ -408,6 +408,7 @@ jobs:
         description: should this release actually publish it's artifacts?
         type: boolean
     steps:
+      - checkout
       - attach_workspace:
           at: /tmp/workspace
       - when:
