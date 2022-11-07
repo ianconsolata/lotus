@@ -1143,7 +1143,7 @@ workflows:
               only:
                 - /^v\d+\.\d+\.\d+(-rc\d+)?$/
       - release:
-          name: "Release (dry-run)"
+          name: "Release"
           requires:
             - "Build ( darwin / amd64 )"
             - "Build ( linux / amd64 )"
@@ -1155,7 +1155,7 @@ workflows:
             tags:
               only:
                 - /^v\d+\.\d+\.\d+(-rc\d+)?$/
-      - release-dry-run:
+      - release:
           name: "Release (dry-run)"
           dry-run: true
           requires:
