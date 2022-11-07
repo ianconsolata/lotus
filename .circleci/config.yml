@@ -1105,7 +1105,6 @@ workflows:
           filters:
             branches:
               only:
-                - goreleaser-prebuilt-m1
                 - /^release\/v\d+\.\d+\.\d+(-rc\d+)?$/
             tags:
               only:
@@ -1115,7 +1114,6 @@ workflows:
           filters:
             branches:
               only:
-                - goreleaser-prebuilt-m1
                 - /^release\/v\d+\.\d+\.\d+(-rc\d+)?$/
             tags:
               only:
@@ -1125,12 +1123,24 @@ workflows:
           filters:
             branches:
               only:
-                - goreleaser-prebuilt-m1
                 - /^release\/v\d+\.\d+\.\d+(-rc\d+)?$/
             tags:
               only:
                 - /^v\d+\.\d+\.\d+(-rc\d+)?$/
       - release:
+          name: "Release (dry-run)"
+          requires:
+            - "Build ( darwin / amd64 )"
+            - "Build ( linux / amd64 )"
+            - "Build ( darwin / arm64 )"
+          filters:
+            branches:
+              ignore:
+                - /.*/
+            tags:
+              only:
+                - /^v\d+\.\d+\.\d+(-rc\d+)?$/
+      - release-dry-run:
           name: "Release (dry-run)"
           dry-run: true
           requires:
@@ -1140,11 +1150,7 @@ workflows:
           filters:
             branches:
               only:
-                - goreleaser-prebuilt-m1
                 - /^release\/v\d+\.\d+\.\d+(-rc\d+)?$/
-            tags:
-              only:
-                - /^v\d+\.\d+\.\d+(-rc\d+)?$/
       - build-appimage:
           name: "Build AppImage"
           filters:
