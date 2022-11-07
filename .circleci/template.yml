@@ -397,7 +397,8 @@ jobs:
         type: boolean
     steps:
       - checkout
-      - install_ipfs
+      - run: |
+          apk update && apk add kubo
       - attach_workspace:
           at: /tmp/workspace
       - when:
