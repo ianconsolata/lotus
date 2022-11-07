@@ -11,9 +11,6 @@ executors:
   ubuntu:
     docker:
       - image: ubuntu:20.04
-  goreleaser:
-    docker:
-      - image: goreleaser/goreleaser-pro
   packer:
     description: |
       The HashiCorp provided Packer container
@@ -383,7 +380,7 @@ jobs:
           when: always
 
   release:
-    executor: goreleaser
+    executor: golang
     parameters:
       dry-run:
         default: false
@@ -391,6 +388,10 @@ jobs:
         type: boolean
     steps:
       - checkout
+      - run: |
+          echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
+          sudo apt update
+          sudo apt install goreleaser-pro
       - install_ipfs
       - attach_workspace:
           at: /tmp/workspace
