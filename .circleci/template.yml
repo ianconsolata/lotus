@@ -398,7 +398,13 @@ jobs:
     steps:
       - checkout
       - run: |
-          apk update && apk add kubo
+          apk update && apk add wget
+          wget https://dist.ipfs.tech/kubo/v0.16.0/kubo_v0.16.0_linux-amd64.tar.gz
+          tar -xvzf kubo_v0.16.0_linux-amd64.tar.gz
+          pushd kubo
+          sudo bash install.sh
+          popd
+          rm -rf kubo
       - attach_workspace:
           at: /tmp/workspace
       - when:
