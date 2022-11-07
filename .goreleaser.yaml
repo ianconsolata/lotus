@@ -57,14 +57,14 @@ archives:
 
 release:
   github:
-    owner: filecoin-project
+    owner: ianconsolata
     name: lotus
   prerelease: auto
-  name_template: "Release v{{.Version}}"
+  name_template: "v{{.Version}}"
 
 brews:
   - tap:
-      owner: filecoin-project
+      owner: ianconsolata
       name: homebrew-lotus
       branch: master
     ids:
