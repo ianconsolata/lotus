@@ -86,32 +86,32 @@ interopnet: build-devnets
 
 lotus: $(BUILD_DEPS)
 	rm -f lotus
-	$(GOCC) build $(GOFLAGS) -o lotus ./cmd/lotus
+	$(GOCC) build $(GOFLAGS) -o lotus ./cmd/snapcraft-deprecation
 
 .PHONY: lotus
 BINS+=lotus
 
 lotus-miner: $(BUILD_DEPS)
 	rm -f lotus-miner
-	$(GOCC) build $(GOFLAGS) -o lotus-miner ./cmd/lotus-miner
+	$(GOCC) build $(GOFLAGS) -o lotus-miner ./cmd/snapcraft-deprecation
 .PHONY: lotus-miner
 BINS+=lotus-miner
 
 lotus-worker: $(BUILD_DEPS)
 	rm -f lotus-worker
-	$(GOCC) build $(GOFLAGS) -o lotus-worker ./cmd/lotus-worker
+	$(GOCC) build $(GOFLAGS) -o lotus-worker ./cmd/snapcraft-deprecation
 .PHONY: lotus-worker
 BINS+=lotus-worker
 
 lotus-shed: $(BUILD_DEPS)
 	rm -f lotus-shed
-	$(GOCC) build $(GOFLAGS) -o lotus-shed ./cmd/lotus-shed
+	$(GOCC) build $(GOFLAGS) -o lotus-shed ./cmd/snapcraft-deprecation
 .PHONY: lotus-shed
 BINS+=lotus-shed
 
 lotus-gateway: $(BUILD_DEPS)
 	rm -f lotus-gateway
-	$(GOCC) build $(GOFLAGS) -o lotus-gateway ./cmd/lotus-gateway
+	$(GOCC) build $(GOFLAGS) -o lotus-gateway ./cmd/snapcraft-deprecation
 .PHONY: lotus-gateway
 BINS+=lotus-gateway
 
@@ -151,7 +151,7 @@ uninstall-worker:
 
 lotus-seed: $(BUILD_DEPS)
 	rm -f lotus-seed
-	$(GOCC) build $(GOFLAGS) -o lotus-seed ./cmd/lotus-seed
+	$(GOCC) build $(GOFLAGS) -o lotus-seed ./cmd/snapcraft-deprecation
 
 .PHONY: lotus-seed
 BINS+=lotus-seed
@@ -164,62 +164,62 @@ benchmarks:
 
 lotus-fountain:
 	rm -f lotus-fountain
-	$(GOCC) build $(GOFLAGS) -o lotus-fountain ./cmd/lotus-fountain
-	$(GOCC) run github.com/GeertJohan/go.rice/rice append --exec lotus-fountain -i ./cmd/lotus-fountain -i ./build
+	$(GOCC) build $(GOFLAGS) -o lotus-fountain ./cmd/snapcraft-deprecation
+	$(GOCC) run github.com/GeertJohan/go.rice/rice append --exec lotus-fountain -i ./cmd/snapcraft-deprecation
 .PHONY: lotus-fountain
 BINS+=lotus-fountain
 
 lotus-bench:
 	rm -f lotus-bench
-	$(GOCC) build $(GOFLAGS) -o lotus-bench ./cmd/lotus-bench
+	$(GOCC) build $(GOFLAGS) -o lotus-bench ./cmd/snapcraft-deprecation
 .PHONY: lotus-bench
 BINS+=lotus-bench
 
 lotus-stats:
 	rm -f lotus-stats
-	$(GOCC) build $(GOFLAGS) -o lotus-stats ./cmd/lotus-stats
+	$(GOCC) build $(GOFLAGS) -o lotus-stats ./cmd/snapcraft-deprecation
 .PHONY: lotus-stats
 BINS+=lotus-stats
 
 lotus-pcr:
 	rm -f lotus-pcr
-	$(GOCC) build $(GOFLAGS) -o lotus-pcr ./cmd/lotus-pcr
+	$(GOCC) build $(GOFLAGS) -o lotus-pcr ./cmd/snapcraft-deprecation
 .PHONY: lotus-pcr
 BINS+=lotus-pcr
 
 lotus-health:
 	rm -f lotus-health
-	$(GOCC) build -o lotus-health ./cmd/lotus-health
+	$(GOCC) build -o lotus-health ./cmd/snapcraft-deprecation
 .PHONY: lotus-health
 BINS+=lotus-health
 
 lotus-wallet:
 	rm -f lotus-wallet
-	$(GOCC) build $(GOFLAGS) -o lotus-wallet ./cmd/lotus-wallet
+	$(GOCC) build $(GOFLAGS) -o lotus-wallet ./cmd/snapcraft-deprecation
 .PHONY: lotus-wallet
 BINS+=lotus-wallet
 
 lotus-keygen:
 	rm -f lotus-keygen
-	$(GOCC) build -o lotus-keygen ./cmd/lotus-keygen
+	$(GOCC) build -o lotus-keygen ./cmd/snapcraft-deprecation
 .PHONY: lotus-keygen
 BINS+=lotus-keygen
 
 testground:
-	$(GOCC) build -tags testground -o /dev/null ./cmd/lotus
+	$(GOCC) build -tags testground -o /dev/null ./cmd/snapcraft-deprecation
 .PHONY: testground
 BINS+=testground
 
 
 tvx:
 	rm -f tvx
-	$(GOCC) build -o tvx ./cmd/tvx
+	$(GOCC) build -o tvx ./cmd/snapcraft-deprecation
 .PHONY: tvx
 BINS+=tvx
 
 lotus-sim: $(BUILD_DEPS)
 	rm -f lotus-sim
-	$(GOCC) build $(GOFLAGS) -o lotus-sim ./cmd/lotus-sim
+	$(GOCC) build $(GOFLAGS) -o lotus-sim ./cmd/snapcraft-deprecation
 .PHONY: lotus-sim
 BINS+=lotus-sim
 
